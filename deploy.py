@@ -40,7 +40,7 @@ def main():
     print(f"{C}="*50)
 
     print(f"{C}[*] Downloading zeus.js from GitHub...{RES}")
-    raw_url = "https://raw.githubusercontent.com/IR-NETLIFY/NETLIFY/main/docs/zeus.js"
+    raw_url = "https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/zeus.js"
     try:
         response = requests.get(raw_url, timeout=15)
         if response.status_code == 200:
