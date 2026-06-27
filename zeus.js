@@ -2277,7 +2277,13 @@ const HTML_TEMPLATES = {
 
                 <div class="pt-4 border-t border-gray-100 dark:border-zinc-900 space-y-4">
                     <div>
-                        <label class="block text-xs font-bold text-gray-500 dark:text-zinc-400 mb-2 uppercase tracking-wider">آی‌پی تمیز کلودفلر (اختیاری - هر خط یک آی‌پی)</label>
+                        <div class="flex justify-between items-end mb-2">
+                            <label class="block text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">آی‌پی تمیز کلودفلر (اختیاری - هر خط یک آی‌پی)</label>
+                            <button type="button" onclick="openIpModal()" class="flex items-center gap-1 px-2 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded-lg text-[10px] font-bold transition border border-blue-200 dark:border-blue-800/50 shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                دریافت آی‌پی
+                            </button>
+                        </div>
                         <textarea id="input-ips" rows="2" placeholder="104.16.0.1" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-xs font-mono text-gray-800 dark:text-zinc-100 placeholder-gray-400/80 transition resize-none"></textarea>
                     </div>
 
@@ -2310,7 +2316,36 @@ const HTML_TEMPLATES = {
             </form>
         </div>
     </div>
-
+	<div id="ip-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 ease-out">
+        <div class="w-full max-w-sm bg-white dark:bg-amoled-card border border-gray-200 dark:border-amoled-border rounded-2xl shadow-xl overflow-hidden transition-all transform duration-300 opacity-0 scale-95 ease-out">
+            <div class="px-6 py-4 border-b border-gray-150 dark:border-amoled-border flex justify-between items-center bg-gray-50 dark:bg-zinc-900/50">
+                <h3 class="font-bold text-gray-900 dark:text-zinc-100">دریافت آی‌پی تمیز</h3>
+                <button type="button" onclick="toggleIpModal(false)" class="text-gray-400 hover:text-gray-600 dark:hover:text-zinc-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div id="ip-loading-state" class="text-center py-4 hidden">
+                    <span class="text-sm text-gray-500 dark:text-gray-400">در حال دریافت لیست...</span>
+                </div>
+                <div id="ip-form-content">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1.5 text-gray-700 dark:text-zinc-300">انتخاب اپراتور</label>
+                        <select id="operator-select" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-amoled-input border border-gray-300 dark:border-amoled-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-gray-700 dark:text-zinc-300 cursor-pointer appearance-none">
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1.5 text-gray-700 dark:text-zinc-300">تعداد آی‌پی</label>
+                        <input type="number" id="ip-count-input" value="10" min="1" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-amoled-input border border-gray-300 dark:border-amoled-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-center font-mono" dir="ltr">
+                    </div>
+                    <div class="flex gap-3 mt-6">
+                        <button type="button" onclick="toggleIpModal(false)" class="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 font-medium rounded-lg text-sm transition text-gray-700 dark:text-zinc-300">انصراف</button>
+                        <button type="button" onclick="insertSelectedIps()" class="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm transition shadow-sm">درج در کادر</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="qr-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 ease-out">
         <div class="w-full max-w-sm bg-white dark:bg-amoled-card border border-gray-200 dark:border-amoled-border rounded-2xl shadow-xl overflow-hidden p-6 text-center transition-all transform duration-300 opacity-0 scale-95 ease-out">
             <h3 id="qr-modal-title" class="font-bold text-gray-900 dark:text-zinc-100 mb-4">اسکن کد QR</h3>
@@ -3318,7 +3353,7 @@ const HTML_TEMPLATES = {
                 window.location.reload();
             }
         }
-const CURRENT_VERSION = '1.2.8';
+const CURRENT_VERSION = '1.2.9';
 
 		async function checkForUpdates(isManual = false) {
             try {
@@ -3388,6 +3423,73 @@ const CURRENT_VERSION = '1.2.8';
             setInterval(() => loadUsers(true), 60000);
             setTimeout(() => checkForUpdates(false), 2000);
         });
+		async function openIpModal() {
+            const modal = document.getElementById('ip-modal');
+            const card = modal.querySelector('div');
+            const select = document.getElementById('operator-select');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+            card.classList.remove('opacity-0', 'scale-95');
+            card.classList.add('opacity-100', 'scale-100');
+
+            if (select.options.length === 0) {
+                document.getElementById('ip-loading-state').classList.remove('hidden');
+                document.getElementById('ip-form-content').classList.add('hidden');
+                try {
+                    const res = await fetch('https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/ips.txt');
+                    const text = await res.text();
+                    window.rawIpsData = text;
+
+                    const lines = text.split('\n');
+                    const operators = lines.filter(line => line.trim().startsWith('#')).map(line => line.replace('#', '').trim());
+                    
+                    select.innerHTML = operators.map(op => `<option value="${op}">${op}</option>`).join('');
+                } catch(e) {
+                    alert('خطا در دریافت لیست آی‌پی‌ها');
+                } finally {
+                    document.getElementById('ip-loading-state').classList.add('hidden');
+                    document.getElementById('ip-form-content').classList.remove('hidden');
+                }
+            }
+        }
+
+        function toggleIpModal(show) {
+            const modal = document.getElementById('ip-modal');
+            const card = modal.querySelector('div');
+            if (!show) {
+                modal.classList.remove('opacity-100', 'pointer-events-auto');
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                card.classList.remove('opacity-100', 'scale-100');
+                card.classList.add('opacity-0', 'scale-95');
+            }
+        }
+
+        function insertSelectedIps() {
+            const op = document.getElementById('operator-select').value;
+            const count = parseInt(document.getElementById('ip-count-input').value) || 10;
+            const text = window.rawIpsData;
+            
+            const lines = text.split('\n');
+            let startIndex = lines.findIndex(line => line.trim() === '#' + op);
+            if (startIndex === -1) return;
+
+            let ips = [];
+            for (let i = startIndex + 1; i < lines.length; i++) {
+                let line = lines[i].trim();
+                if (line.startsWith('#') || line === '') break;
+                if (line.length > 0) ips.push(line);
+            }
+
+            // انتخاب رندوم
+            const shuffled = ips.sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, count);
+
+            const textarea = document.getElementById('input-ips');
+            textarea.value = selected.join('\n');
+            
+            toggleIpModal(false);
+        }
     </script>
 </body>
 </html>`,
