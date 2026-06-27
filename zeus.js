@@ -2276,10 +2276,13 @@ const HTML_TEMPLATES = {
                 </div>
 
                 <div class="pt-4 border-t border-gray-100 dark:border-zinc-900 space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 dark:text-zinc-400 mb-2 uppercase tracking-wider">آی‌پی تمیز کلودفلر (اختیاری - هر خط یک آی‌پی)</label>
-                        <textarea id="input-ips" rows="2" placeholder="104.16.0.1" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-xs font-mono text-gray-800 dark:text-zinc-100 placeholder-gray-400/80 transition resize-none"></textarea>
-                    </div>
+					<div>
+    					<div class="flex items-center justify-between mb-2">
+        					<label class="block text-xs font-bold text-gray-500 dark:text-zinc-400 uppercase tracking-wider">Cloudflare Clean IP</label>
+        					<button type="button" onclick="openIpSelectorModal()" class="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 rounded-lg text-xs font-bold transition border border-indigo-200 dark:border-indigo-800">IP List</button>
+    					</div>
+    					<textarea id="input-ips" rows="2" placeholder="104.16.0.1" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-xs font-mono text-gray-800 dark:text-zinc-100 placeholder-gray-400/80 transition resize-none"></textarea>
+					</div>
 
                     <div>
                         <label class="block text-xs font-bold text-gray-500 dark:text-zinc-400 mb-2 uppercase tracking-wider">شبیه‌ساز اثر انگشت مرورگر (Fingerprint)</label>
@@ -2310,7 +2313,37 @@ const HTML_TEMPLATES = {
             </form>
         </div>
     </div>
-
+<div id="ip-selector-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 ease-out">
+    <div class="w-full max-w-sm bg-white dark:bg-amoled-card border border-gray-200 dark:border-amoled-border rounded-2xl shadow-xl overflow-hidden transition-all transform duration-300 opacity-0 scale-95 ease-out">
+        <div class="px-6 py-4 border-b border-gray-150 dark:border-amoled-border flex justify-between items-center bg-gray-50 dark:bg-zinc-900/50">
+            <h3 class="font-bold text-gray-900 dark:text-zinc-100 text-sm">Select Clean IP</h3>
+            <button type="button" onclick="toggleIpSelectorModal(false)" class="text-gray-400 hover:text-gray-600 dark:hover:text-zinc-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="p-6 space-y-4">
+            <div id="ip-loading-state" class="text-center text-sm text-gray-500 dark:text-zinc-400 hidden">
+                Loading IPs...
+            </div>
+            <div id="ip-selection-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium mb-1.5 text-gray-700 dark:text-zinc-300">Operator</label>
+                    <select id="ip-operator-select" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-amoled-input border border-gray-300 dark:border-amoled-border rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 dark:text-zinc-300 cursor-pointer">
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium mb-1.5 text-gray-700 dark:text-zinc-300">Count</label>
+                    <input type="number" id="ip-count-input" min="1" value="10" class="w-full px-3 py-2.5 bg-gray-50 dark:bg-amoled-input border border-gray-300 dark:border-amoled-border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs font-mono text-center">
+                </div>
+            </div>
+            <div class="pt-4 flex gap-3">
+                <button type="button" onclick="toggleIpSelectorModal(false)" class="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 font-medium rounded-xl text-xs transition">Cancel</button>
+                <button type="button" onclick="applySelectedIps()" class="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl text-xs transition">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>
     <div id="qr-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 ease-out">
         <div class="w-full max-w-sm bg-white dark:bg-amoled-card border border-gray-200 dark:border-amoled-border rounded-2xl shadow-xl overflow-hidden p-6 text-center transition-all transform duration-300 opacity-0 scale-95 ease-out">
             <h3 id="qr-modal-title" class="font-bold text-gray-900 dark:text-zinc-100 mb-4">اسکن کد QR</h3>
@@ -3318,7 +3351,7 @@ const HTML_TEMPLATES = {
                 window.location.reload();
             }
         }
-const CURRENT_VERSION = '1.2.10';
+const CURRENT_VERSION = '1.2.11';
 
 		async function checkForUpdates(isManual = false) {
             try {
@@ -3378,6 +3411,114 @@ const CURRENT_VERSION = '1.2.10';
                 btn.disabled = false;
             }
         }
+let cachedIpsData = {};
+
+async function fetchIpsList() {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/ips.txt');
+        if (!response.ok) throw new Error('Fetch failed');
+        const text = await response.text();
+        
+        const blocks = text.split('----------');
+        cachedIpsData = {};
+        
+        blocks.forEach(block => {
+            const lines = block.trim().split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            if (lines.length === 0) return;
+            
+            let opName = "Unknown";
+            const ips = [];
+            
+            lines.forEach(line => {
+                if (line.includes('#')) {
+                    opName = line.split('#')[1].trim();
+                } else if (!line.startsWith('[source')) {
+                    ips.push(line);
+                }
+            });
+            
+            if (ips.length > 0) {
+                cachedIpsData[opName] = ips;
+            }
+        });
+        
+        populateIpSelect();
+    } catch (err) {
+        alert('Failed to load IP list from GitHub.');
+        toggleIpSelectorModal(false);
+    }
+}
+
+function populateIpSelect() {
+    const select = document.getElementById('ip-operator-select');
+    select.innerHTML = '<option value="all">All</option>';
+    
+    Object.keys(cachedIpsData).forEach(op => {
+        const option = document.createElement('option');
+        option.value = op;
+        option.textContent = op;
+        select.appendChild(option);
+    });
+}
+
+function toggleIpSelectorModal(show) {
+    const modal = document.getElementById('ip-selector-modal');
+    const card = modal.querySelector('div');
+    if (show) {
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('opacity-100', 'pointer-events-auto');
+        card.classList.remove('opacity-0', 'scale-95');
+        card.classList.add('opacity-100', 'scale-100');
+    } else {
+        modal.classList.remove('opacity-100', 'pointer-events-auto');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        card.classList.remove('opacity-100', 'scale-100');
+        card.classList.add('opacity-0', 'scale-95');
+    }
+}
+
+async function openIpSelectorModal() {
+    toggleIpSelectorModal(true);
+    document.getElementById('ip-loading-state').classList.remove('hidden');
+    document.getElementById('ip-selection-form').classList.add('hidden');
+    
+    await fetchIpsList();
+    
+    document.getElementById('ip-loading-state').classList.add('hidden');
+    document.getElementById('ip-selection-form').classList.remove('hidden');
+}
+
+function applySelectedIps() {
+    const operator = document.getElementById('ip-operator-select').value;
+    let count = parseInt(document.getElementById('ip-count-input').value, 10);
+    if (isNaN(count) || count < 1) count = 10;
+    
+    let availableIps = [];
+    if (operator === 'all') {
+        Object.values(cachedIpsData).forEach(ips => {
+            availableIps = availableIps.concat(ips);
+        });
+    } else {
+        availableIps = cachedIpsData[operator] || [];
+    }
+    
+    availableIps = [...new Set(availableIps)];
+    
+    let selectedIps = [];
+    if (count >= availableIps.length) {
+        selectedIps = availableIps;
+    } else {
+        const shuffled = availableIps.slice();
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        selectedIps = shuffled.slice(0, count);
+    }
+    
+    document.getElementById('input-ips').value = selectedIps.join('\n');
+    toggleIpSelectorModal(false);
+}
         document.addEventListener('DOMContentLoaded', () => {
             const versionBadge = document.getElementById('panel-version');
             if (versionBadge) versionBadge.innerText = 'v' + CURRENT_VERSION;
@@ -3674,5 +3815,7 @@ const CURRENT_VERSION = '1.2.10';
         });
     </script>
 </body>
+
+
 </html>`
 };
