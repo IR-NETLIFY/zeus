@@ -1,10 +1,12 @@
 <div align="center">
-
-
   <img width="100%" alt="Zeus Panel Dark Mode" 
        src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/dark.png" 
        style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); margin-bottom: 15px;" />
        
+  <img width="100%" alt="Zeus Panel Dark Mode" 
+       src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/status.png" 
+       style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); margin-bottom: 15px;" />
+
   <img width="100%" alt="Zeus Panel Interface" 
        src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/deployer.png" 
        style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); margin-bottom: 15px;" />
@@ -12,19 +14,24 @@
   <img width="100%" alt="Zeus Panel Status" 
        src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/updater.png" 
        style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); margin-bottom: 15px;" />
-
-
 </div>
 
+<div align="center">
   <h1>⚡️ پنل زئوس (Zeus Panel)</h1>
-  <strong>سیستم پیشرفته مدیریت کانفیگ VLESS روی Cloudflare Workers + D1</strong>
+  <p><strong>سیستم پیشرفته مدیریت کانفیگ VLESS روی Cloudflare Workers + D1</strong></p>
 
-  <br><br>
+  <br>
 
   <p>
-    <a href="https://github.com/IR-NETLIFY/zeus"><img src="https://img.shields.io/badge/Version-1.3.7-0052CC?style=for-the-badge&logo=semver&logoColor=white" alt="Version"></a>
-    <a href="https://cloudflare.com"><img src="https://img.shields.io/badge/Platform-Cloudflare_Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Platform"></a>
-    <a href="https://t.me/IR_NETLIFY"><img src="https://img.shields.io/badge/Developer-IR__NETLIFY-00792D?style=for-the-badge&logo=telegram&logoColor=white" alt="Developer"></a>
+    <a href="https://github.com/IR-NETLIFY/zeus">
+      <img src="https://img.shields.io/badge/Version-1.4.2-0052CC?style=for-the-badge&logo=semver&logoColor=white" alt="Version">
+    </a>
+    <a href="https://cloudflare.com">
+      <img src="https://img.shields.io/badge/Platform-Cloudflare_Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Platform">
+    </a>
+    <a href="https://t.me/IR_NETLIFY">
+      <img src="https://img.shields.io/badge/Developer-IR__NETLIFY-00792D?style=for-the-badge&logo=telegram&logoColor=white" alt="Developer">
+    </a>
   </p>
 </div>
 
@@ -60,7 +67,6 @@
 </div>
 <br>
 
-
 ۲.  بر روی گزینه **«دریافت توکن»** کلیک نمایید. پس از ورود به کلودفلر، به انتهای صفحه بروید و روی دکمه آبی رنگ **Continue to summary** کلیک کنید. ساخت توکن بزنید و آن را کپی کنید
 
 ۳.  توکن دریافت شده را در فیلد مربوطه در سایت پنل ساز وارد کنید و دکمه **ساخت پنل** را بزنید.
@@ -74,7 +80,6 @@
 
 ## 🛠 امکانات صفحه وضعیت (Status Page)
 
-
 کاربران شما دارای یک صفحه وضعیت اختصاصی هستند. آن‌ها با باز کردن لینک وضعیت خود می‌توانند موارد زیر را زنده مشاهده کنند:
 - **وضعیت اتصال:** (فعال، مسدود شده دستی، منقضی شده زمانی، تمام شدن حجم).
 - **نمودارها و آمار:** مشاهده درصد حجم مصرف‌شده و روزهای باقی‌مانده.
@@ -87,4 +92,3 @@
 
 * ⚙️ **سازنده اصلی پنل زئوس:** [Macan-dev](https://github.com/macan-dev/EasySNI) (پشتیبانی: [@EzAccess1](https://t.me/EzAccess1))
 * 🏗 **توسعه‌دهنده سیستم دیپلوی خودکار و ارتقاءدهنده امکانات پنل:** [IR_NETLIFY](https://t.me/IR_NETLIFY)
-
