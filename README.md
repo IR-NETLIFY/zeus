@@ -5,7 +5,7 @@
        src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/dark.png" 
        style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); margin-bottom: 15px;" />
        
----
+
   <img width="100%" alt="Zeus Panel Dark Mode" 
        src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/status.png" 
        style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); margin-bottom: 15px;" />
@@ -15,7 +15,7 @@
        src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/deployer.png" 
        style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); margin-bottom: 15px;" />
        
----
+
   <img width="100%" alt="Zeus Panel Status" 
        src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/updater.png" 
        style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); margin-bottom: 15px;" />
@@ -91,7 +91,15 @@
 
 
 ---
+## Star History
 
+<a href="https://www.star-history.com/?repos=IR-NETLIFY%2Fzeus&type=timeline&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=IR-NETLIFY/zeus&type=timeline&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=IR-NETLIFY/zeus&type=timeline&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=IR-NETLIFY/zeus&type=timeline&legend=top-left" />
+ </picture>
+</a>
 
 ## ⚖️ حق نشر و اعتبارات
 
