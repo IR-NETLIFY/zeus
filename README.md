@@ -33,7 +33,7 @@
     <a href="https://cloudflare.com">
       <img src="https://img.shields.io/badge/Platform-Cloudflare_Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Platform">
     </a>
-    <a href="https://t.me/IR_NETLIFY">
+    <a href="
       <img src="https://img.shields.io/badge/Developer-IR__NETLIFY-00792D?style=for-the-badge&logo=telegram&logoColor=white" alt="Developer">
     </a>
   </p>
@@ -111,15 +111,3 @@
 
 <p align="center"> از حمایت شما متشکریم 🙏</p>
 
-
-
-
----
-
-## ⚖️ حق نشر و اعتبارات
-
-
-این پنل توسط ماکان نوشته شده و من فقط آن را توسعه داده ام
-
-* **سازنده اولیه:** نسخه پایه پروژه ([EasySNI](https://github.com/macan-dev/EasySNI)) توسط  ([EzAccess1](https://t.me/EzAccess1)) ایجاد شده است.
-* **توسعه‌دهنده فعلی:** ارتقاء پنل، افزودن قابلیت‌های پیشرفته، توسعه رابط کاربری جدید و پیاده‌سازی سیستم دیپلوی خودکار توسط  ([IR_NETLIFY](https://t.me/IR_NETLIFY)) انجام شده است.
