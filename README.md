@@ -3,7 +3,7 @@
 <table width="100%">
   <tr>
     <td width="50%" valign="middle" align="center">
-      <img src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/add.png" width="100%" alt="Zeus Panel Status" style="border-radius: 12px;">
+      <img src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/updater.png" width="100%" alt="Zeus Panel Status" style="border-radius: 12px;">
     </td>
     <td width="50%" valign="middle" align="center">
       <img src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/deployer.png" width="100%" alt="Zeus Panel Interface" style="border-radius: 12px;">
@@ -11,7 +11,7 @@
   </tr>
   <tr>
     <td width="50%" valign="middle" align="center">
-      <img src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/updater.png" width="100%" alt="Zeus Panel Status" style="border-radius: 12px;">
+      <img src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/add.png" width="100%" alt="Zeus Panel Status" style="border-radius: 12px;">
     </td>
     <td width="50%" valign="middle" align="center">
       <img src="https://raw.githubusercontent.com/IR-NETLIFY/zeus/refs/heads/main/photos/status.png" width="100%" alt="Zeus Panel Dark Mode" style="border-radius: 12px;">
